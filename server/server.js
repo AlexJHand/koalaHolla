@@ -5,7 +5,7 @@ var path = require( 'path' );
 var port = process.env.PORT || 5000;
 
 // routers
-var koalaRouter = require('./routes/koala');
+var koalaRouter = require('../routes/koala');
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('server/public'));

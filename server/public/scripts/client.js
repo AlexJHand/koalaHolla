@@ -16,7 +16,7 @@ $( document ).ready( function(){
       age: 'testName',
       gender: 'testName',
       readyForTransfer: 'testName',
-      notes: 'testName',
+      notes: 'testName'
     };
     // call saveKoala with the new obejct
     saveKoala( objectToSend );
@@ -27,10 +27,23 @@ function getKoalas(){
   console.log( 'in getKoalas' );
   // ajax call to server to get koalas
   $.ajax({
-    url: '/koalas',
+    url: '/koala',
     type: 'GET',
     success: function( data ){
       console.log( 'got some koalas: ', data );
+      $('#viewKoalas').empty();
+      for (var i = 0; i < data.length; i++) {
+        console.log('In for loop.');
+        var $trow = $('<tr>');
+        $trow.append('<td>' + data[i].name + '</td>');
+        $trow.append('<td>' + data[i].age + '</td>');
+        $trow.append('<td>' + data[i].gender + '</td>');
+        $trow.append('<td>' + data[i].ready_for_transfer + '</td>');
+        $trow.append('<td>' + data[i].notes + '</td>');        
+        $('#viewKoalas').append($trow);
+        
+
+      }// end for loop
     } // end success
   }); //end ajax
   // display on DOM with buttons that allow edit of each
