@@ -33,6 +33,34 @@ router.get('/', function( req, res ) {
 
     });
 });
+router.post('/', function( req, res ){
+    console.log('In POST route');
+    var koalaIn = req.body;
+    console.log(koalaIn);
+    pool.connect(function (connectionError, client, done) {
+        if(connectionError) {
+            console.log(connectionError);
+            res.sendStatus(500);
+        } else {
+            console.log('In connect else');
+            var queryString = 'INSERT INTO koalaholla (name, gender, age, ready_for_transfer, notes)'
+            + ' VALUES ($1, $2, $3, $4, $5)';
+            var values = [koalaIn.name, koalaIn.gender, koalaIn.age, koalaIn.readyForTransfer, koalaIn.notes];
+            console.log(queryString + values);
+            client.query(queryString, values, function (queryError, resultObj) {
+                done();
+                if(queryError) {
+                    res.sendStatus(500);
+                    console.log('fail');
+                    console.log(queryError);
+                }else {
+                    console.log('In success');
+                    res.sendStatus(201);
+                }
+            })
+        }
+    })
+})
 
 
 module.exports = router;

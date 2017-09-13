@@ -12,11 +12,11 @@ $( document ).ready( function(){
     // NOT WORKING YET :(
     // using a test object
     var objectToSend = {
-      name: 'testName',
-      age: 'testName',
-      gender: 'testName',
-      readyForTransfer: 'testName',
-      notes: 'testName'
+      name: '',
+      age: '',
+      gender: '',
+      readyForTransfer: '',
+      notes: ''
     };
     // call saveKoala with the new obejct
     saveKoala( objectToSend );
@@ -53,7 +53,7 @@ function saveKoala( newKoala ){
   console.log( 'in saveKoala', newKoala );
   // ajax call to server to get koalas
   $.ajax({
-    url: '/koalas',
+    url: '/koala',
     type: 'POST',
     data: newKoala,
     success: function( data ){
@@ -61,3 +61,11 @@ function saveKoala( newKoala ){
     } // end success
   }); //end ajax
 }
+/*
+function addKoala() {
+  var incomingKoala = {
+    name: $('#nameIn'),
+
+  }
+} // end addKoala
+*/
